@@ -28,7 +28,7 @@ api_key: ''
 api_endpoint: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
 # API端点URL。不同的API服务商或部署方式可能使用不同的端点。
 
-api_model: 'qwen3-omni-flash'
+api_model: 'qwen3.8-omni-flash'
 # 指定使用的AI模型名称。
 
 enable_thinking_mode: false

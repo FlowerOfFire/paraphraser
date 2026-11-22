@@ -15,7 +15,7 @@ class ConfigManager:
     DEFAULT_CONFIG = {
         'debug_mode': False, 'silent_mode': False, 'api_key': '',
         'api_endpoint': 'https://dashscope.aliyuncs.com/compatible-mode/v1',  # 【新增】API端点
-        'api_model': 'qwen3-omni-flash', 'enable_thinking_mode': False,
+        'api_model': 'qwen3.8-omni-flash', 'enable_thinking_mode': False,
         'current_prompt_key': '',  # 【改动】设为空，由 ApiClient 在运行时智能处理
         'input': {
             'shift_toggle': 0,          # 0=Caps Lock循环切换, 1=Caps Lock开启+Shift关闭

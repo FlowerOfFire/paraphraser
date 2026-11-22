@@ -17,7 +17,7 @@
 
 - Windows 推荐（`Caps Lock` 硬件状态读取与自动还原仅在 Windows 下可用；非 Windows 环境可运行但无自动还原功能）
 - Python 3.10+
-- 可用的麦克风设备与 OpenAI 兼容多模态音频接口（默认对接阿里云百炼 DashScope `qwen3-omni-flash`）
+- 可用的麦克风设备与 OpenAI 兼容多模态音频接口（默认对接阿里云百炼 DashScope `qwen3.8-omni-flash`）
 
 ## 快速开始
 
