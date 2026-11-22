@@ -1,0 +1,7 @@
+pynput
+pyperclip
+requests
+numpy
+pyaudio
+pygame
+ruamel.yaml

@@ -1,0 +1,128 @@
+# 语音转述工具配置文件示例
+# 复制为 config-paraphraser.yaml 并填入 api_key，或设置环境变量 DASHSCOPE_API_KEY
+
+# ========== 基础设置 ==========
+debug_mode: false
+# 是否开启调试模式。开启后会输出更详细的日志信息，便于排查问题。
+
+silent_mode: false
+# 是否开启静默模式。开启后将不会在控制台输出大部分运行信息，只保留关键错误提示。
+
+api_key: ''
+# 访问通义千问API服务的密钥。如果留空，程序会尝试从系统环境变量 DASHSCOPE_API_KEY 中读取。
+
+api_endpoint: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
+# API端点URL。不同的API服务商或部署方式可能使用不同的端点。
+
+api_model: 'qwen3-omni-flash'
+# 指定使用的AI模型名称。
+
+enable_thinking_mode: false
+# 是否启用模型的"思考"模式。这是部分API支持的特性，可能会影响响应速度和内容。
+
+current_prompt_key: '0'
+# 当前使用的提示词模式（对应 prompts/ 目录下的文件名，不含扩展名）。
+# 如果指定的提示词不存在，程序会自动降级到第一个可用的提示词。
+# 可通过快捷键 Ctrl+Alt+Y 在所有可用提示词间循环切换。
+
+# ========== 输入处理 ==========
+input:
+  shift_toggle: 0
+  # Caps Lock 键行为模式：
+  #   0 - Caps Lock 键循环切换大写状态（按一次开，再按一次关）
+  #   1 - Caps Lock 键开启大写，Shift 键关闭大写
+  # 注：此配置影响录音结束后如何还原 Caps Lock 状态
+
+  system_wait_time: 0.02
+  # 模拟按键时 press 和 release 之间的延迟时间（秒）
+
+  enable_ctrl_alt_t: true
+  # 是否启用 Ctrl+Alt+T 快捷键用于录音。关闭后只能用 Caps Lock。
+
+# ========== 录音参数 ==========
+recording:
+  channels: 1
+  # 音频通道数。1代表单声道，2代表立体声。
+
+  sample_rate: 16000
+  # 采样率（Hz）。
+
+  chunk: 1024
+  # 每次从音频流中读取的帧数（数据块大小）。
+
+  pre_record_seconds: 1.0
+  # 预录音时长（秒）。程序会保留按下录音键之前若干秒的音频，以防漏掉开头的词语。
+
+  min_press_duration: 0.5
+  # 最小有效按键时长（秒）。短于此时长的按键操作将被视为误触而取消。
+
+  event_cooldown: 0.1
+  # 事件冷却时间（秒）。按键释放后的一小段不响应时间。
+
+  max_duration_seconds: 180
+  # 最大录音时长（秒）。达到此时长后将自动结束录音。
+
+  warning_time_seconds: 20
+  # 预警时间（秒）。在剩余录音时长等于此值时，播放预警音效提醒用户。
+
+# ========== 功能特性 ==========
+features:
+  enable_stream_paste: true
+  # 是否启用流式粘贴。开启后，识别结果会逐段粘贴出来；关闭则会在识别完成后一次性粘贴。
+
+  remove_trailing_period: true
+  # 是否自动移除AI生成结果末尾的句号。
+
+  paste_delay: 0.02
+  # 流式粘贴时，每粘贴一小段文本后的延迟时间（秒）。
+
+# ========== 音频处理 ==========
+audio_processing:
+  enable_limiter: true
+  # 是否启用音频压限器（Limiter），用于防止音量过大导致的削波失真。
+
+  input_gain_db: 18
+  # 输入增益（分贝）。
+
+  max_level_db: -1
+  # 压限器的最大音量阈值（分贝）。
+
+  release_time_ms: 200
+  # 压限器的释放时间（毫秒）。
+
+# ========== 音效配置 ==========
+sfx:
+  dir: 'sounds'
+  # 存放音效文件的文件夹名称。
+
+  master_volume: 0.4
+  # 所有音效的总音量（0.0到1.0之间）。
+
+  enable_triggering: true
+  enable_cancel: true
+  enable_recognize: true
+  enable_output: true
+  enable_countdown: true
+  enable_prompt_switch_sound: true
+
+  triggering_volume: 1.0
+  cancel_volume: 1.0
+  recognize_volume: 1.0
+  output_volume: 0.9
+  countdown_volume: 1.0
+  prompt_switch_volume: 1.0
+
+  output_interval: 0.06
+  output_silence_prob: 0.2
+
+  files:
+    triggering: 'triggering.wav'
+    cancel: 'cancel.wav'
+    recognize: 'recognize.wav'
+    countdown: 'countdown.wav'
+    prompt_switch: 'prompt_switch.wav'
+    output_list:
+      - 'output-l-h.wav'
+      - 'output-l.wav'
+      - 'output-r-h.wav'
+      - 'output-r.wav'
