@@ -13,8 +13,7 @@ dist/
 venv/
 env/
 
-# Local config & secrets (contains personal API key)
-config-paraphraser.yaml
+# Local config & secrets
 .env
 .env.*
 
