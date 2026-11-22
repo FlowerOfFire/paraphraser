@@ -155,17 +155,17 @@ class ApiClient:
                     }
                 ]
 
+                enable_thinking = bool(self.config.get('enable_thinking_mode', False))
+
                 payload = {
                     "model": self.config.get('api_model'),
                     "messages": messages,
                     "modalities": ["text"],
-                    "stream": True
+                    "stream": True,
+                    "enable_thinking": enable_thinking
                 }
 
-                # 处理思考模式
-                if self.config.get('enable_thinking_mode'):
-                    payload["extra_body"] = {'enable_thinking': True}
-                    self.logger.debug("思考模式已开启。")
+                self.logger.debug(f"思考模式: {'开启' if enable_thinking else '关闭'}")
 
                 self.logger.info(f"[DEBUG] 发送 POST 请求到: {url}")
                 self.logger.info(f"[DEBUG] 模型: {self.config.get('api_model')}")
